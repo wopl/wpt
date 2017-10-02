@@ -24,4 +24,13 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 #sudo gedit /etc/apache2/envvars
 #export APACHE_RUN_USER=www-data
 #export APACHE_RUN_GROUP=www-data 
-RUN sed -ri -e 's!iwww-data!root!g' /etc/apache2/envvars
+#RUN sed -ri -e 's!www-data!root!g' /etc/apache2/envvars
+#RUN sed -i s/www-data/root/g /etc/apache2/envvars
+
+### adjust uid/gid to work with apache2 defaults
+#RUN usermod -u 1000 www-data
+
+ENTRYPOINT \
+  chgrp -R www-data /var/www/wpt \
+  && chown -R www-data /var/www/wpt \
+  && apache2-foreground
