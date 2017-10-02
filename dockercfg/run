@@ -1,0 +1,13 @@
+######################################################################
+##                                                                  ##
+## t (WPTools on Docker)             (c) Wolfram Plettscher 10/2017 ##
+##                                                                  ##
+######################################################################
+
+docker run --name=wpt \
+           --detach \
+           --restart=always \
+           -v /home/wopl/data/docker/t/wpt:/var/www/wpt \
+           woppl/wpt
+
+#           -v /home/wopl/data/docker/t/public_html:/var/www/html \
