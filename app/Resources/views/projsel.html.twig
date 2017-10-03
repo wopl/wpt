@@ -1,0 +1,58 @@
+{##################################################################################}
+{##                                                                              ##}
+{## projsel.html.twig                             (c) Wolfram Plettscher 10/2016 ##}
+{##                                                                              ##}
+{##################################################################################}
+{% extends 'skeleton.html.twig' %}
+
+{##################################################################################}
+{#                                                                                #}
+{# contentbody                                                                    #}
+{#                                                                                #}
+{##################################################################################}
+{% block contentbody %}
+
+  <h1>Project Selection</h1>
+
+  {{ form_start (form) }}
+
+  {# form(form, {'attr': {'novalidate': 'novalidate'}} ) #}
+
+  <br />  
+
+  <table class='sqltable' border='0', cellspacing='0', cellpadding='2' >
+  <tr>
+    <th> Select </th>
+	<th> Default </th>
+	<th width=400 > Project </th>
+	<th> Proj.-ID </th>
+  </tr>
+
+  {% for project in form.projects %}
+    <tr>
+{#
+	<td><input type='radio' name='select' value= {{ project.proj_uuid.vars.value }}
+	    {% if project.proj_uuid.vars.value == app.session.get ('projcurr') %}
+          checked
+		{% endif %} 
+        </td> #} 
+
+      <td> {{ form_widget (form.radio_selectproj[loop.index0] ) }} </td> 
+      <td> {{ form_widget (form.radio_defaultproj[loop.index0] ) }} </td> 
+{#     <td> {{ form.radio_defaultproj[loop.index0].vars.value }} </td> #}
+      <td> {{ project.projshort.vars.value }} </td> 
+      <td> {{ project.proj_uuid.vars.value | slice (0,6) }} </td> 
+    </tr>
+  {% endfor %}
+  </table><br />
+ 
+  <table>
+    <tr>
+ 	  <td> {{ form_widget (form.submit, {'attr': {'class': 'css_btn_class'}}) }} </td>
+{# 	  <td> {{ form_widget (form.editgroups, {'attr': {'class': 'css_btn_class'}}) }} </td> #}
+    </tr>
+  </table>
+
+  {{ form_end (form) }}
+  
+{% endblock %} {# of contentbody #}

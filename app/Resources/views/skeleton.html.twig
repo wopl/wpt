@@ -1,0 +1,135 @@
+{##################################################################################}
+{##                                                                              ##}
+{## skeleton.html.twig                            (c) Wolfram Plettscher 10/2016 ##}
+{##                                                                              ##}
+{##################################################################################}
+
+<!DOCTYPE html>
+<html>
+  {################################################################################}
+  {#                                                                              #}
+  {# head                                                                         #}
+  {#                                                                              #}
+  {################################################################################}
+  <head>
+    {% block head %}
+      <meta charset="UTF-8" />
+      <title>{% block title %}WP Tools{% endblock %}</title>
+
+      {############################################################################}
+      {# stylesheets                                                              #}
+      {############################################################################}
+      {% block stylesheets %}
+        <link rel="stylesheet" href="{{ asset('css/style.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/menu.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/stdbutton.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/selectbox.css') }}" />
+        <link rel="stylesheet" href="{{ asset('css/modal.css') }}" />
+      {% endblock %} {# of stylesheets #}
+
+      {############################################################################}
+      {# javascripts                                                              #}
+      {############################################################################}
+      {% block javascripts %}
+          <script src="{{ asset('js/jquery-2.1.3.min.js') }}"></script>
+          <script src="script.js"></script>
+          <script src="{{ asset('js/zebratable.js') }}"></script>
+      {% endblock %} {# of javascripts #}
+
+      {############################################################################}
+
+      <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+    {% endblock %} {# of head #}
+  </head>
+
+  {################################################################################}
+  {#                                                                              #}
+  {# body                                                                         #}
+  {#                                                                              #}
+  {################################################################################}
+  <body>
+    {% block body %}
+
+    {##############################################################################}
+    {#                                                                            #}
+    {# div wrapper                                                                #}
+    {#                                                                            #}
+    {##############################################################################}
+    <div id="wrapper">
+
+      {############################################################################}
+      {#                                                                          #}
+      {# div header                                                               #}
+      {#                                                                          #}
+      {############################################################################}
+      <div id="header">
+        {% block header %}
+
+          <table width="1220px"><tr>
+            <td width='400px' align="left" valign="bottom"><b>Wolfram Plettscher's Project Tools</b></td>
+            <td align="center" valign="bottom"><b> {{ app.session.get ('company') }} </b></td>
+            <td width='400px' align="right" valign="bottom"><b>Welcome {{ app.session.get('username') }} </b></td>
+          </tr><tr>
+            <td align="left" valign="bottom"><b> {{ date().format('D j M Y H:i T') }} </b></td>
+            <td align="center" valign="bottom"><b></b></td>
+            <td align="right" valign="bottom"><b>Project: {{ app.session.get ('projlong') }} </b></td>
+          </tr></table>
+
+        {% endblock %} {# of header #}
+      </div> {# of header #}
+
+      {############################################################################}
+      {#                                                                          #}
+      {# div cssmenu                                                              #}
+      {#                                                                          #}
+      {############################################################################}
+      <div id="cssmenu">
+        {% block cssmenu %}
+
+          {{ knp_menu_render ('mainMenu') }}
+
+        {% endblock %} {# of cssmenu #}
+      </div> {# of cssmenu #}
+
+      {############################################################################}
+      {#                                                                          #}
+      {# div contentbody                                                          #}
+      {#                                                                          #}
+      {############################################################################}
+      <div id="contentbody">
+        {% block contentbody %}
+        {% endblock %} {# of contentbody #}
+      </div> {# of contentbody #}
+
+    </div> {# of wrapper #}
+
+    {##############################################################################}
+    {#                                                                            #}
+    {# div kicker                                                                 #}
+    {#                                                                            #}
+    {##############################################################################}
+    <div id="kicker">
+      {% block kicker %}
+
+        {# <?php echo $_SESSION['kicker']; ?> #}
+
+      {% endblock %} {# of kicker #}
+    </div> {# of kicker #}
+
+    {##############################################################################}
+    {#                                                                            #}
+    {# div footer                                                                 #}
+    {#                                                                            #}
+    {##############################################################################}
+    <div id="footer">
+      {% block footer %}
+
+        &copy; Wolfram Plettscher 2016
+
+      {% endblock %} {# of footer #}
+    </div> {# of footer #}
+
+    {% endblock %}
+  </body>
+
+</html>

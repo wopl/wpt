@@ -1,0 +1,81 @@
+{##################################################################################}
+{##                                                                              ##}
+{## login.html.twig                               (c) Wolfram Plettscher 03/2016 ##}
+{##                                                                              ##}
+{##################################################################################}
+{% extends 'skeleton.html.twig' %}
+
+{##################################################################################}
+{#                                                                                #}
+{# header                                                                         #}
+{#                                                                                #}
+{##################################################################################}
+{% block header %}
+
+{% endblock %} {# of header #}
+
+{##################################################################################}
+{#                                                                                #}
+{# cssmenu                                                                        #}
+{#                                                                                #}
+{##################################################################################}
+{% block cssmenu %}
+
+  {{ knp_menu_render ('loginMenu') }}
+
+{% endblock %} {# of cssmenu #}
+
+{##################################################################################}
+{#                                                                                #}
+{# contentbody                                                                    #}
+{#                                                                                #}
+{##################################################################################}
+{% block contentbody %}
+
+  <h1>Wolfram Plettscher's Project Tools</h1>
+
+{#  <form action="<?php echo checksslproxy ('login.php')?>" method="post"> #}
+  <form action="{{ path('login') }}" method="post">
+{#  {{ form_start(form) }} #}
+    <table>
+      <tr>
+        <td width="80px">Account: </td> 
+        <td><input type="text" name="account" size="20" value="" maxlength="30" tabindex="1"/></td>
+{#        <td> {{ form_widget(form.account) }} </td> #}
+      </tr><tr>
+        <td>Username: </td>
+        <td><input type="text" name="_username" size="20" value="" maxlength="30" tabindex="2"/></td>
+{#        <td> {{ form_widget(form.username) }} </td> #}
+      </tr><tr>
+        <td>Password: </td>
+        <td><input type="password" name="_password" size="20" value="" maxlength="30" tabindex="3"/></td> 
+{#        <td> {{ form_widget(form.password) }} </td> #}
+      </tr>
+    </table>
+    <br />
+    <table>
+      <tr>
+{#        <td> {{ form_widget(form.save) }} </td> #}
+        <td><input class='css_btn_class' name='login' type='submit' value='login' /></td>
+{#        <td><input class='css_btn_class' name='newaccount' type='submit' value='new Account' formaction='newaccount.php'/></td> #}
+      </tr>
+    </table>
+  </form>
+
+{#  {{ form_widget(form) }} #}
+{#  {{ form_end(form) }} #}
+
+{% endblock %} {# of contentbody #}
+
+{##############################################################################}
+{#                                                                            #}
+{# div kicker                                                                 #}
+{#                                                                            #}
+{##############################################################################}
+{% block kicker %}
+
+  {% if error %}
+    <div> {{ error.messageKey|trans(error.messageData, 'security') }}</div>
+  {% endif %}
+
+{% endblock %} {# of kicker #}

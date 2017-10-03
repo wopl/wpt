@@ -33,3 +33,57 @@ services:
     # AppBundle\Service\ExampleService:
     #     arguments:
     #         $someArgument: 'some_value'
+
+### added by wopl ####################
+
+  # register service to run method after successful login
+##  app.security_listener:
+##    class: AppBundle\Listener\SecurityListener
+#    arguments: ["@service_container"]
+##    tags:
+##      - { name: kernel.event_listener, event: security.interactive_login, method: onSecurityInteractiveLogin }
+
+  # run a custom user_provider to verify login credentials  
+##  app.user_provider:
+##    class: AppBundle\Security\User\UserProvider
+
+  # run my own authenticator for account credentials --- test only, not needed at this time
+#  app.token_authenticator:
+#   class: AppBundle\Security\TokenAuthenticator
+
+##    AppBundle\Menu\MenuBuilder\:  
+    app.menu_builder:
+        class: AppBundle\Menu\MenuBuilder
+##        resource: '../../src/AppBundle/Menu/MenuBuilder'
+        public: true
+        arguments: ["@knp_menu.factory"]
+        tags:
+          - { name: knp_menu.menu_builder, method: createMainMenu, alias: mainMenu }
+          - { name: knp_menu.menu_builder, method: createLoginMenu, alias: loginMenu }
+
+    Knp\Menu\FactoryInterface:
+        alias: knp_menu.factory
+        public: false
+
+################################################
+
+### aus dem Internet #############################
+#
+#app.component_menu.builder:
+#    class: AppBundle\Component\Menu\Builder
+#    arguments: ['@knp_menu.factory', '@event_dispatcher']
+#    calls:
+#        - [setAuthorizationChecker, ['@security.authorization_checker']]
+#
+#
+#Knp\Menu\ItemInterface:
+#    class: Knp\Menu\MenuItem
+#    factory: ['@app.component_menu.builder', mainMenu]
+#    arguments: ['@knp_menu.matcher']
+#    tags:
+#        - { name: knp_menu.menu, alias: main }
+#
+#Knp\Menu\FactoryInterface:
+#    alias: knp_menu.factory
+#    public: false
+################################################
